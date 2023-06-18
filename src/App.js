@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
 import { Component } from "react";
 
@@ -37,6 +37,14 @@ class App extends Component {
           placeholder="seacher monsters"
           onChange={(Event) => {
             console.log(Event.target.value);
+            const searchString = Event.target.value.toLocaleLowerCase();
+            const monsterFilter = this.state.monsters.filter((monster) => {
+              return monster.name.toLocaleLowerCase().includes(searchString);
+            });
+
+            this.setState(() => {
+              return { monsters: monsterFilter };
+            });
           }}
         ></input>
         {this.state.monsters.map((monster) => {
