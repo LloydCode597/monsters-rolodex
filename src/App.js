@@ -1,7 +1,7 @@
 // import logo from "./logo.svg";
 import "./App.css";
 import { Component } from "react";
-
+import CardList from "./components/Card-List/card-list.component";
 class App extends Component {
   constructor() {
     super();
@@ -18,19 +18,13 @@ class App extends Component {
         return res;
       })
       .then((users) =>
-        this.setState(
-          () => {
-            return { monsters: users };
-          },
-          () => {
-            console.log(this.state);
-          }
-        )
+        this.setState(() => {
+          return { monsters: users };
+        })
       );
   }
 
   onSearchChange = (Event) => {
-    console.log(Event.target.value);
     const searchField = Event.target.value.toLocaleLowerCase();
 
     this.setState(() => {
@@ -53,13 +47,7 @@ class App extends Component {
           placeholder="seacher monsters"
           onChange={onSearchChange}
         ></input>
-        {monsterFilter.map((monster) => {
-          return (
-            <div key={monster.id}>
-              <h1>{monster.name}</h1>;
-            </div>
-          );
-        })}
+        <CardList monsters={monsterFilter} />
       </div>
     );
   }
